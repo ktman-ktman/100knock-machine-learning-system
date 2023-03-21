@@ -1,0 +1,37 @@
+{
+    "name": "100knock-machine-learning-system",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "..",
+        "args": {
+            "VARIANT": "1.9.0-rc1",
+            "USERNAME": "vscode",
+            "USE_UID": "1000",
+            "USE_GID": "1000",
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash",
+                        "args": [
+                            "-l"
+                        ]
+                    }
+                }
+            },
+            "extensions": [
+                "julialang.language-julia-insider",
+                "VisualStudioExptTeam.vscodeintellicode",
+            ],
+        }
+    },
+    "containerEnv": {
+        "JULIA_PROJECT": "${containerWorkspaceFolder}",
+        "JULIA_DEPOT_PATH": "${containerWorkspaceFolder}/.julia",
+    },
+    "remoteUser": "vscode",
+    "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+}
